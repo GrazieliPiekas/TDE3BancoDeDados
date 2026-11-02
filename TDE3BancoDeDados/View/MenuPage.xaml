@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TDE3BancoDeDados.View.MenuPage"
+             Title="Menu Principal">
+    <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="Center">
+        <Button x:Name="btClientes" Text="Cadastro de Clientes" Clicked="btClientes_Clicked"/>
+        <Button x:Name="btProdutos" Text="Cadastro de Produtos" Clicked="btProdutos_Clicked"/>
+        <Button x:Name="btCompra" Text="Compra" Clicked="btCompra_Clicked"/>
+    </VerticalStackLayout>
+</ContentPage>

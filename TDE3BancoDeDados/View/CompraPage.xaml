@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TDE3BancoDeDados.View.CompraPage"
+             Title="Compra">
+    <ScrollView>
+        <VerticalStackLayout Padding="10,0,0,0" Spacing="10">
+
+            <!-- Compra -->
+            <Label Text="Código da Compra:"/>
+            <HorizontalStackLayout Spacing="20">
+                <Entry x:Name="txCodigoCompra" Placeholder="Digite o código" Keyboard="Numeric"/>
+                <Button x:Name="btConsultar" Text="Consultar" Clicked="btConsultar_Clicked"/>
+                <Button x:Name="btLimpar" Text="Limpar Form" Clicked="btLimpar_Clicked"/>
+            </HorizontalStackLayout>
+            <Label Text="Para incluir não é preciso informar o código, ele é gerado automaticamente (AutoIncrement). Use o código apenas para consultar."
+                   FontSize="12" TextColor="Gray"/>
+            <Label Text="Cliente:"/>
+            <Picker x:Name="pkCliente" Title="Selecione o cliente" ItemDisplayBinding="{Binding Nome}"/>
+            <Label Text="Data da Compra:"/>
+            <DatePicker x:Name="dpData" Format="dd/MM/yyyy"/>
+            <Label x:Name="lbValorTotal" Text="Valor Total: 0,00" FontAttributes="Bold"/>
+
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button x:Name="btIncluir" Text="Incluir" Clicked="btIncluir_Clicked"/>
+                <Button x:Name="btAlterar" Text="Alterar" Clicked="btAlterar_Clicked"/>
+                <Button x:Name="btExcluir" Text="Excluir" Clicked="btExcluir_Clicked"/>
+            </HorizontalStackLayout>
+
+            <CollectionView x:Name="lvListaCompras"
+                            HorizontalOptions="Start"
+                            SelectionMode="Single"
+                            SelectionChanged="lvListaCompras_SelectionChanged">
+                <CollectionView.Header>
+                    <Grid ColumnDefinitions="40,100,80,90" HorizontalOptions="Start"
+                          BackgroundColor="DarkGray">
+                        <Label Grid.Column="0" Text="COD" FontAttributes="Bold" FontSize="17"/>
+                        <Label Grid.Column="1" Text="DATA" FontAttributes="Bold" FontSize="17"/>
+                        <Label Grid.Column="2" Text="CLIENTE" FontAttributes="Bold" FontSize="17"/>
+                        <Label Grid.Column="3" Text="TOTAL" FontAttributes="Bold" FontSize="17"/>
+                    </Grid>
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="40,100,80,90"
+                              HorizontalOptions="Start" Padding="5">
+                            <Label Grid.Column="0" Text="{Binding CodigoCompra}"/>
+                            <Label Grid.Column="1" Text="{Binding DataCompra, StringFormat='{0:dd/MM/yyyy}'}"/>
+                            <Label Grid.Column="2" Text="{Binding CodigoCliente}"/>
+                            <Label Grid.Column="3" Text="{Binding ValorTotal, StringFormat='{0:F2}'}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Itens da Compra -->
+            <Label Text="Itens da Compra" FontAttributes="Bold" FontSize="20" Margin="0,20,0,0"/>
+            <Label Text="Para adicionar um item: escolha o Produto, digite a Quantidade e toque em Incluir Item."
+                   FontSize="12" TextColor="Gray"/>
+            <Label Text="Código do Item:"/>
+            <Entry x:Name="txCodigoItem" Placeholder="Gerado automaticamente" IsReadOnly="True"/>
+            <Label Text="Não é preciso digitar o código do item. Para alterar ou excluir, toque no item na lista abaixo."
+                   FontSize="12" TextColor="Gray"/>
+            <Label Text="Produto:"/>
+            <Picker x:Name="pkProduto" Title="Selecione o produto" ItemDisplayBinding="{Binding NomeProduto}"/>
+            <Label Text="Quantidade:"/>
+            <Entry x:Name="txQuantidade" Placeholder="Digite a quantidade" Keyboard="Numeric"/>
+
+            <!-- Botões em duas linhas para caberem na tela do celular -->
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button x:Name="btIncluirItem" Text="Incluir Item" Clicked="btIncluirItem_Clicked"/>
+                <Button x:Name="btAlterarItem" Text="Alterar Item" Clicked="btAlterarItem_Clicked"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button x:Name="btExcluirItem" Text="Excluir Item" Clicked="btExcluirItem_Clicked"/>
+                <Button x:Name="btLimparItem" Text="Limpar Item" Clicked="btLimparItem_Clicked"/>
+            </HorizontalStackLayout>
+
+            <CollectionView x:Name="lvListaItens"
+                            HorizontalOptions="Start"
+                            SelectionMode="Single"
+                            SelectionChanged="lvListaItens_SelectionChanged">
+                <CollectionView.Header>
+                    <Grid ColumnDefinitions="40,90,60,110" HorizontalOptions="Start"
+                          BackgroundColor="DarkGray">
+                        <Label Grid.Column="0" Text="COD" FontAttributes="Bold" FontSize="17"/>
+                        <Label Grid.Column="1" Text="PRODUTO" FontAttributes="Bold" FontSize="17"/>
+                        <Label Grid.Column="2" Text="QTD" FontAttributes="Bold" FontSize="17"/>
+                        <Label Grid.Column="3" Text="PARCIAL" FontAttributes="Bold" FontSize="17"/>
+                    </Grid>
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="40,90,60,110"
+                              HorizontalOptions="Start" Padding="5">
+                            <Label Grid.Column="0" Text="{Binding CodigoItem}"/>
+                            <Label Grid.Column="1" Text="{Binding CodigoProduto}"/>
+                            <Label Grid.Column="2" Text="{Binding Quantidade}"/>
+                            <Label Grid.Column="3" Text="{Binding ValorParcial, StringFormat='{0:F2}'}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

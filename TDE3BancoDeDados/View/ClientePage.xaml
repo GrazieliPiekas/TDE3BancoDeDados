@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TDE3BancoDeDados.View.ClientePage"
+             Title="Cadastro de Clientes">
+    <ScrollView>
+        <VerticalStackLayout Padding="10,0,0,0" Spacing="10">
+            <Label Text="Código do Cliente:"/>
+            <HorizontalStackLayout Spacing="20">
+                <Entry x:Name="txCodigo" Placeholder="Digite o código" Keyboard="Numeric"/>
+                <Button x:Name="btConsultar" Text="Consultar" Clicked="btConsultar_Clicked"/>
+                <Button x:Name="btLimpar" Text="Limpar Form" Clicked="btLimpar_Clicked"/>
+            </HorizontalStackLayout>
+            <Label Text="Para incluir não é preciso informar o código, ele é gerado automaticamente (AutoIncrement). Use o código apenas para consultar."
+                   FontSize="12" TextColor="Gray"/>
+            <Label Text="Nome:"/>
+            <Entry x:Name="txNome" Placeholder="Digite o nome do cliente" MaxLength="50"/>
+            <Label Text="RG:"/>
+            <Entry x:Name="txRG" Placeholder="Digite o RG (somente números)" Keyboard="Numeric" MaxLength="10"/>
+            <Label Text="Telefone:"/>
+            <Entry x:Name="txTelefone" Placeholder="Digite o telefone" Keyboard="Telephone" MaxLength="14"/>
+
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button x:Name="btIncluir" Text="Incluir" Clicked="btIncluir_Clicked"/>
+                <Button x:Name="btAlterar" Text="Alterar" Clicked="btAlterar_Clicked"/>
+                <Button x:Name="btExcluir" Text="Excluir" Clicked="btExcluir_Clicked"/>
+            </HorizontalStackLayout>
+
+            <RefreshView x:Name="rvListaClientes" Refreshing="rvListaClientes_Refreshing">
+
+                <CollectionView x:Name="lvListaClientes"
+                                HorizontalOptions="Start"
+                                SelectionMode="Single"
+                                SelectionChanged="lvListaClientes_SelectionChanged">
+                    <CollectionView.Header>
+                        <Grid ColumnDefinitions="40,150,100,120" HorizontalOptions="Start"
+                              BackgroundColor="DarkGray">
+                            <Label Grid.Column="0" Text="COD" FontAttributes="Bold" FontSize="17"/>
+                            <Label Grid.Column="1" Text="NOME" FontAttributes="Bold" FontSize="17"/>
+                            <Label Grid.Column="2" Text="RG" FontAttributes="Bold" FontSize="17"/>
+                            <Label Grid.Column="3" Text="TELEFONE" FontAttributes="Bold" FontSize="17"/>
+                        </Grid>
+                    </CollectionView.Header>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="40,150,100,120"
+                                  HorizontalOptions="Start" Padding="5">
+                                <Label Grid.Column="0" Text="{Binding CodigoCliente}"/>
+                                <Label Grid.Column="1" Text="{Binding Nome}"/>
+                                <Label Grid.Column="2" Text="{Binding RG}"/>
+                                <Label Grid.Column="3" Text="{Binding Telefone}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+
+            </RefreshView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
